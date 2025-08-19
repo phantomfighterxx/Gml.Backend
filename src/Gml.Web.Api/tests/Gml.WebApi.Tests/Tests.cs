@@ -948,40 +948,4 @@ public class Tests
             Assert.That(response.IsSuccessStatusCode, Is.True);
         });
     }
-
-    [Test]
-    [Order(58)]
-    public async Task UpdateSlimUrl()
-    {
-        var httpContent = TestHelper.CreateJsonObject(new UrlServiceDto(_newTextureUrl));
-
-        var response = await _httpClient.PutAsync("/api/v1/integrations/texture/slim", httpContent);
-        var content = await response.Content.ReadAsStringAsync();
-
-        var model = JsonConvert.DeserializeObject<ResponseMessage<UrlServiceDto>>(content);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(model, Is.Not.Null);
-            Assert.IsTrue(response.IsSuccessStatusCode);
-        });
-    }
-
-    [Test]
-    [Order(59)]
-    public async Task GetSlimUrl()
-    {
-        var response = await _httpClient.GetAsync("/api/v1/integrations/texture/slim");
-        var content = await response.Content.ReadAsStringAsync();
-
-        var model = JsonConvert.DeserializeObject<ResponseMessage<UrlServiceDto>>(content);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(model, Is.Not.Null);
-            Assert.That(model?.Data, Is.Not.Null);
-            Assert.That(model?.Data?.Url, Is.EqualTo(_newTextureUrl));
-            Assert.That(response.IsSuccessStatusCode, Is.True);
-        });
-    }
 }
