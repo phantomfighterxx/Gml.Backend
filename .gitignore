@@ -32,6 +32,8 @@ x86/
 bld/
 [Bb]in/
 [Dd]ata/
+!src/**/Data/
+!src/**/Data/**
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
