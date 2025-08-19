@@ -17,8 +17,10 @@ namespace GmlCore.Interfaces.Integrations
         Task SetActiveAuthService(IAuthServiceInfo? service);
         Task<string> GetSkinServiceAsync();
         Task<string> GetCloakServiceAsync();
+        Task<string> GetSlimServiceAsync();
         Task SetSkinServiceAsync(string url);
         Task SetCloakServiceAsync(string url);
+        Task SetSlimServiceAsync(string url);
         Task<string?> GetSentryService();
         Task SetSentryService(string url);
         Task UpdateDiscordRpc(IDiscordRpcClient client);

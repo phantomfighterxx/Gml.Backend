@@ -28,12 +28,14 @@ import { TextureServiceBaseEntity } from '@/shared/api/contracts';
 interface ConnectTexturesFormProps extends React.HTMLAttributes<HTMLDivElement> {
   skins?: TextureServiceBaseEntity;
   cloaks?: TextureServiceBaseEntity;
+  slim?: TextureServiceBaseEntity;
   onOpenChange: (open: boolean) => void;
 }
 
 export function ConnectTexturesForm({
   skins,
   cloaks,
+  slim,
   onOpenChange,
   ...props
 }: ConnectTexturesFormProps) {
@@ -43,6 +45,7 @@ export function ConnectTexturesForm({
     values: {
       url_skins: skins?.url || '',
       url_cloaks: cloaks?.url || '',
+      url_slim: slim?.url || '',
     },
     resolver: zodResolver(ConnectTexturesSchema),
   });
@@ -59,6 +62,13 @@ export function ConnectTexturesForm({
       await mutateAsync({
         type: TexturesServiceType.TEXTURES_SERVICE_CLOAKS,
         url: data.url_cloaks,
+      });
+    }
+
+    if (form.getFieldState('url_slim').isDirty && data.url_slim) {
+      await mutateAsync({
+        type: TexturesServiceType.TEXTURES_SERVICE_SLIM,
+        url: data.url_slim,
       });
     }
 
@@ -92,9 +102,11 @@ export function ConnectTexturesForm({
     },
   ];
 
-  const handleButtonClick = (skinsUrl: string, cloaksUrl: string) => {
+  const handleButtonClick = (skinsUrl: string, cloaksUrl: string, slimUrl?: string) => {
     form.setValue('url_skins', skinsUrl, { shouldDirty: true });
     form.setValue('url_cloaks', cloaksUrl, { shouldDirty: true });
+    if (slimUrl)
+      form.setValue('url_slim', slimUrl, { shouldDirty: true });
   };
 
   return (
@@ -191,6 +203,24 @@ export function ConnectTexturesForm({
                         </FormControl>
                         {form.formState.errors.url_cloaks && (
                           <FormMessage>{form.formState.errors.url_cloaks.message}</FormMessage>
+                        )}
+                      </FormItem>
+                    )}
+                  />
+
+                  <Controller
+                    control={form.control}
+                    name="url_slim"
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>URL сервиса slim</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input placeholder="Введите URL проверки slim" {...field} />
+                          </div>
+                        </FormControl>
+                        {form.formState.errors.url_slim && (
+                          <FormMessage>{form.formState.errors.url_slim.message}</FormMessage>
                         )}
                       </FormItem>
                     )}

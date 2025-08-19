@@ -26,6 +26,9 @@ export function ConnectTexturesDialog() {
   const { data: textures_cloaks, isLoading: isLoadingCloaks } = useConnectTextures(
     TexturesServiceType.TEXTURES_SERVICE_CLOAKS,
   );
+  const { data: textures_slim, isLoading: isLoadingSlim } = useConnectTextures(
+    TexturesServiceType.TEXTURES_SERVICE_SLIM,
+  );
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -34,7 +37,7 @@ export function ConnectTexturesDialog() {
           size="sm"
           variant="outline"
           className="w-fit"
-          disabled={isLoadingSkins || isLoadingCloaks}
+          disabled={isLoadingSkins || isLoadingCloaks || isLoadingSlim}
         >
           <WallpaperIcon className="mr-2" size={16} />
           Настроить
@@ -56,6 +59,7 @@ export function ConnectTexturesDialog() {
           <ConnectTexturesForm
             skins={textures_skins}
             cloaks={textures_cloaks}
+            slim={textures_slim}
             onOpenChange={onOpenChange}
           />
         </div>
