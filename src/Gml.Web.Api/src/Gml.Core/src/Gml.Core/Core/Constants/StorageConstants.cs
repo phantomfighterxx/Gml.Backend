@@ -7,6 +7,7 @@ namespace Gml.Core.Constants
         public const string ActiveAuthService = "ActiveAuthService";
         public const string SkinUrl = "SkinUrl";
         public const string CloakUrl = "CloakUrl";
+        public const string SlimUrl = "SlimUrl";
         public const string SentrySdnUrl = "SentrySdnUrl";
         public const string DiscordRpcClient = "DiscordRpcClient";
         public const string Settings = "Settings";

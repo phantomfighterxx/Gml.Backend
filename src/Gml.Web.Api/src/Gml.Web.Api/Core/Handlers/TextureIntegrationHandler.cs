@@ -56,6 +56,20 @@ public class TextureIntegrationHandler : ITextureIntegrationHandler
         }
     }
 
+    public static async Task<IResult> GetSlimUrl(IGmlManager gmlManager)
+    {
+        try
+        {
+            var url = await gmlManager.Integrations.GetSlimServiceAsync();
+
+            return Results.Ok(ResponseMessage.Create(new UrlServiceDto(url), "Успешно", HttpStatusCode.OK));
+        }
+        catch (Exception exception)
+        {
+            return Results.BadRequest(ResponseMessage.Create(exception.Message, HttpStatusCode.BadRequest));
+        }
+    }
+
     public static async Task<IResult> SetCloakUrl(
         IGmlManager gmlManager,
         IValidator<UrlServiceDto> validator,
@@ -70,6 +84,22 @@ public class TextureIntegrationHandler : ITextureIntegrationHandler
         await gmlManager.Integrations.SetCloakServiceAsync(urlDto.Url);
 
         return Results.Ok(ResponseMessage.Create("Сервис плащей успешно обновлен", HttpStatusCode.OK));
+    }
+
+    public static async Task<IResult> SetSlimUrl(
+        IGmlManager gmlManager,
+        IValidator<UrlServiceDto> validator,
+        UrlServiceDto urlDto)
+    {
+        var result = await validator.ValidateAsync(urlDto);
+
+        if (!result.IsValid)
+            return Results.BadRequest(ResponseMessage.Create(result.Errors, "Ошибка валидации",
+                HttpStatusCode.BadRequest));
+
+        await gmlManager.Integrations.SetSlimServiceAsync(urlDto.Url);
+
+        return Results.Ok(ResponseMessage.Create("Сервис slim успешно обновлен", HttpStatusCode.OK));
     }
 
     public static async Task<IResult> UpdateUserSkin(

@@ -228,6 +228,10 @@ export const useEditConnectTextures = () => {
         await queryClient.invalidateQueries({
           queryKey: integrationsKeys.texturesEditing(TexturesServiceType.TEXTURES_SERVICE_CLOAKS),
         });
+      if (variables.type === TexturesServiceType.TEXTURES_SERVICE_SLIM)
+        await queryClient.invalidateQueries({
+          queryKey: integrationsKeys.texturesEditing(TexturesServiceType.TEXTURES_SERVICE_SLIM),
+        });
       toast.success('Успешно', {
         description: data.message,
       });

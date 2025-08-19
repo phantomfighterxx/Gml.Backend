@@ -44,6 +44,17 @@ namespace Gml.Core.User
             TextureSkinGuid = !string.IsNullOrEmpty(TextureSkinUrl)
                 ? Guid.NewGuid().ToString()
                 : string.Empty;
+
+            try
+            {
+                var slimService = await Manager.Integrations.GetSlimServiceAsync();
+                var slimUrl = slimService.Replace("{userName}", Name).Replace("{userUuid}", Uuid ?? string.Empty);
+                IsSlim = await Manager.Integrations.TextureProvider.IsSlim(slimUrl);
+            }
+            catch
+            {
+                IsSlim = false;
+            }
         }
 
 
