@@ -20,11 +20,4 @@ public interface ITextureIntegrationHandler
         IGmlManager gmlManager,
         IValidator<UrlServiceDto> validator,
         UrlServiceDto urlDto);
-
-    static abstract Task<IResult> GetSlimUrl(IGmlManager gmlManager);
-
-    static abstract Task<IResult> SetSlimUrl(
-        IGmlManager gmlManager,
-        IValidator<UrlServiceDto> validator,
-        UrlServiceDto urlDto);
 }

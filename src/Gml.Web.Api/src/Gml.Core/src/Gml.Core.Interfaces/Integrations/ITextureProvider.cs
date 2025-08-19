@@ -11,5 +11,4 @@ public interface ITextureProvider
     Task<Stream> GetSkinStream(string? textureUrl);
     Task<Stream> GetCloakStream(string? userTextureSkinUrl);
     Task<Stream> GetHeadByNameStream(string? userName);
-    Task<bool> IsSlim(string url);
 }

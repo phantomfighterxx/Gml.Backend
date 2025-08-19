@@ -356,29 +356,6 @@ public static class EndpointsExtensions
             .Produces<ResponseMessage>((int)HttpStatusCode.BadRequest)
             .RequireAuthorization(c => c.RequireRole("Admin"));
 
-        app.MapGet("/api/v1/integrations/texture/slim", TextureIntegrationHandler.GetSlimUrl)
-            .WithOpenApi(generatedOperation =>
-            {
-                generatedOperation.Summary = "Получение ссылки на сервис slim";
-                return generatedOperation;
-            })
-            .WithDescription("Получение ссылки на сервис slim")
-            .WithName("Get slim texture url")
-            .WithTags("Integration/Textures")
-            .Produces<ResponseMessage>((int)HttpStatusCode.BadRequest);
-
-        app.MapPut("/api/v1/integrations/texture/slim", TextureIntegrationHandler.SetSlimUrl)
-            .WithOpenApi(generatedOperation =>
-            {
-                generatedOperation.Summary = "Обновление ссылки на сервис slim";
-                return generatedOperation;
-            })
-            .WithDescription("Обновление ссылки на сервис slim")
-            .WithName("Update slim texture url")
-            .WithTags("Integration/Textures")
-            .Produces<ResponseMessage>((int)HttpStatusCode.BadRequest)
-            .RequireAuthorization(c => c.RequireRole("Admin"));
-
         app.MapPost("/api/v1/integrations/texture/skins/load", TextureIntegrationHandler.UpdateUserSkin)
             .WithOpenApi(generatedOperation =>
             {

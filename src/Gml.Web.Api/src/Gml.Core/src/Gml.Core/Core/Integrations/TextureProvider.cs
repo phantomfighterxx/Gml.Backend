@@ -106,17 +106,4 @@ public class TextureProvider(string textureServiceEndpoint, IBugTrackerProcedure
 
         return null;
     }
-
-    public async Task<bool> IsSlim(string url)
-    {
-        try
-        {
-            var response = await _httpClintSkinChecker.GetAsync(url);
-            return response.IsSuccessStatusCode;
-        }
-        catch
-        {
-            return false;
-        }
-    }
 }

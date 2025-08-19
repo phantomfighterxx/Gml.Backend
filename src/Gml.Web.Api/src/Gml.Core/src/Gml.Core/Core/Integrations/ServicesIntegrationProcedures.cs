@@ -91,12 +91,6 @@ public class ServicesIntegrationProcedures(
                ?? throw new Exception("Сервис плащей не настроен");
     }
 
-    public async Task<string> GetSlimServiceAsync()
-    {
-        return await storage.GetAsync<string>(StorageConstants.SlimUrl)
-               ?? throw new Exception("Сервис slim не настроен");
-    }
-
     public Task SetSkinServiceAsync(string url)
     {
         return storage.SetAsync(StorageConstants.SkinUrl, url);
@@ -105,11 +99,6 @@ public class ServicesIntegrationProcedures(
     public Task SetCloakServiceAsync(string url)
     {
         return storage.SetAsync(StorageConstants.CloakUrl, url);
-    }
-
-    public Task SetSlimServiceAsync(string url)
-    {
-        return storage.SetAsync(StorageConstants.SlimUrl, url);
     }
 
     public Task<string?> GetSentryService()

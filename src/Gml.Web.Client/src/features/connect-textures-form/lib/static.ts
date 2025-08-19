@@ -9,10 +9,6 @@ export const ConnectTexturesSchema = z.object({
     .string()
     .min(1, { message: 'Вы не заполнили поле' })
     .transform((v) => v.trim()),
-  url_slim: z
-    .string()
-    .optional()
-    .transform((v) => v?.trim() ?? ''),
 });
 
 export type ConnectTexturesFormSchemaType = z.infer<typeof ConnectTexturesSchema>;
